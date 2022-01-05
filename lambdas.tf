@@ -32,7 +32,7 @@ locals {
 data "archive_file" "get_repos_archive_file" {
   type = "zip"
 
-  source_dir  = "${path.module}/${local.get_repos_name}"
+  source_dir  = "${path.module}/lambdas/${local.get_repos_name}"
   output_path = "${path.module}/${local.get_repos_name}.zip"
 }
 
