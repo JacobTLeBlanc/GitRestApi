@@ -47,7 +47,7 @@ resource "aws_lambda_function" "get_repos" {
 }
 
 resource "aws_cloudwatch_log_group" "get_repos_log_group" {
-  name = "aws/lambda/${aws_lambda_function.get_repos.function_name}"
+  name = "/aws/lambda/${aws_lambda_function.get_repos.function_name}"
 
   retention_in_days = 30
 }
