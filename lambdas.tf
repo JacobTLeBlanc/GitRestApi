@@ -42,7 +42,7 @@ resource "aws_lambda_function" "get_repos" {
   handler       = "${local.get_repos_name}.handler"
   role          = aws_iam_role.assume_role_lambda.arn
 
-  runtime          = "python 3.9"
+  runtime          = "python3.9"
   source_code_hash = data.archive_file.get_repos_archive_file.output_base64sha256
 }
 
