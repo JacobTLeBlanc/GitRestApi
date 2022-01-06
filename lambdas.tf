@@ -39,7 +39,7 @@ data "archive_file" "get_repos_archive_file" {
 resource "aws_lambda_function" "get_repos" {
   filename      = "${local.get_repos_name}.zip"
   function_name = local.get_repos_name
-  handler       = "lambda.lambda_handler"
+  handler       = "${local.get_repos_name}.lambda_handler"
   role          = aws_iam_role.assume_role_lambda.arn
 
   runtime          = "python3.9"
