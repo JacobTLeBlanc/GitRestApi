@@ -28,3 +28,20 @@ resource "aws_api_gateway_integration" "get_repos_integration" {
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.get_repos.invoke_arn
 }
+
+#####################
+# Deployment
+
+resource "aws_api_gateway_deployment" "git_deployment" {
+  rest_api_id = aws_api_gateway_rest_api.git.id
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "v1" {
+  deployment_id = aws_api_gateway_deployment.git_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.git.id
+  stage_name    = "v1"
+}
