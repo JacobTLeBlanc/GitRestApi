@@ -7,7 +7,7 @@ resource "aws_api_gateway_rest_api" "git" {
 # /get_repos
 
 resource "aws_api_gateway_resource" "get_repos_resource" {
-  parent_id   = aws_api_gateway_rest_api.git.id
+  parent_id   = aws_api_gateway_rest_api.git.root_resource_id
   path_part   = local.get_repos_name
   rest_api_id = aws_api_gateway_rest_api.git.id
 }
