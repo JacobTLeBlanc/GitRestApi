@@ -3,12 +3,17 @@ import urllib.request as request
 
 def get_repos(user):
     """
-    Gets repos for the configured user
+    Gets repos for the given user
+
+    Params
+    -------
+    user
+        user to get repos from
 
     Returns
     -------
     json
-        a json object representing a list of repositories
+        a json object representing a list of (public) repositories
     """
 
     response = request.urlopen(
