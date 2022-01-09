@@ -26,5 +26,5 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': get_repos()
+        'body': json.dumps(get_repos())
     }
