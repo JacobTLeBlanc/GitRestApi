@@ -21,7 +21,7 @@ resource "aws_api_gateway_resource" "get_repos_user_resource" {
 resource "aws_api_gateway_method" "get_repos_method" {
   authorization = "NONE"
   http_method   = "GET"
-  resource_id   = aws_api_gateway_resource.get_repos_resource.id
+  resource_id   = aws_api_gateway_resource.get_repos_user_resource.id
   rest_api_id   = aws_api_gateway_rest_api.git.id
 }
 
