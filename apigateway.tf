@@ -12,6 +12,12 @@ resource "aws_api_gateway_resource" "get_repos_resource" {
   rest_api_id = aws_api_gateway_rest_api.git.id
 }
 
+resource "aws_api_gateway_resource" "get_repos_user_resource" {
+  parent_id   = aws_api_gateway_resource.get_repos_resource.id
+  path_part   = "{user}"
+  rest_api_id = aws_api_gateway_rest_api.git.root_resource_id
+}
+
 resource "aws_api_gateway_method" "get_repos_method" {
   authorization = "NONE"
   http_method   = "GET"
