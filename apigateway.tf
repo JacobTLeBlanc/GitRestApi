@@ -41,6 +41,10 @@ resource "aws_api_gateway_integration" "get_repos_integration" {
 resource "aws_api_gateway_deployment" "git_deployment" {
   rest_api_id = aws_api_gateway_rest_api.git.id
 
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.git.body))
+  }
+
   lifecycle {
     create_before_destroy = true
   }
