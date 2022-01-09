@@ -1,8 +1,5 @@
 import json
 import urllib.request as request
-import os
-
-USER = os.environ["USER"]
 
 def get_repos(user):
     """
@@ -16,7 +13,7 @@ def get_repos(user):
 
     response = request.urlopen(
             request.Request(
-                url='https://api.github.com/users/' + USER + '/repos',
+                url='https://api.github.com/users/' + user + '/repos',
                 headers={'Accept': 'application/json'},
                 method='GET'
             ),
@@ -27,7 +24,9 @@ def get_repos(user):
 
 def lambda_handler(event, context):
 
+    user = event['pathParameters']['user']
+
     return {
         'statusCode': 200,
-        'body': json.dumps(get_repos('jacobtleblanc'))
+        'body': json.dumps(get_repos(user))
     }
