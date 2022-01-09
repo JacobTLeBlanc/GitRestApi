@@ -43,7 +43,7 @@ resource "aws_lambda_function" "get_repos" {
   role          = aws_iam_role.assume_role_lambda.arn
 
   environment {
-    USER =
+    USER = var.git_user
   }
 
   runtime          = "python3.9"
