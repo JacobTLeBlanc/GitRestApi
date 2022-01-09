@@ -1,7 +1,10 @@
 import json
 import urllib.request as request
+import os
 
-def get_repos():
+USER = os.environ["USER"]
+
+def get_repos(user):
     """
     Gets repos for the configured user
 
@@ -13,7 +16,7 @@ def get_repos():
 
     response = request.urlopen(
             request.Request(
-                url='https://api.github.com/users/jacobtleblanc/repos',
+                url='https://api.github.com/users/' + USER + '/repos',
                 headers={'Accept': 'application/json'},
                 method='GET'
             ),
@@ -26,5 +29,5 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(get_repos())
+        'body': json.dumps(get_repos('jacobtleblanc'))
     }
