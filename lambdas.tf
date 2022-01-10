@@ -69,7 +69,7 @@ data "aws_iam_policy_document" "get_repos_policy_document" {
 
     resources = [
       aws_cloudwatch_log_group.get_repos_log_group.arn,
-      "${aws_cloudwatch_log_group.get_repos_log_group.arn}/*"
+      "${aws_cloudwatch_log_group.get_repos_log_group.arn}*"
     ]
   }
 }
