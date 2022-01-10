@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "assume_role_lambda_policy" {
 }
 
 resource "aws_iam_role" "get_repos_role" {
-  name = "AssumeRoleLambda"
+  name = "GetReposRole"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role_lambda_policy.json
 }
