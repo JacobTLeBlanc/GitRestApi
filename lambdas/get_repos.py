@@ -1,5 +1,9 @@
 import json
+import logging
 import urllib.request as request
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def get_repos(user):
     """
@@ -15,6 +19,8 @@ def get_repos(user):
     json
         a json object representing a list of (public) repositories
     """
+
+    logger.info("Getting repos from " + user)
 
     response = request.urlopen(
             request.Request(
