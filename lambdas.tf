@@ -1,5 +1,5 @@
 #####################
-# General Config
+# Get Repos Lambda
 
 data "aws_iam_policy_document" "assume_role_lambda_policy" {
   statement {
@@ -16,14 +16,11 @@ data "aws_iam_policy_document" "assume_role_lambda_policy" {
   }
 }
 
-resource "aws_iam_role" "assume_role_lambda" {
+resource "aws_iam_role" "get_repos_role" {
   name = "AssumeRoleLambda"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role_lambda_policy.json
 }
-
-#####################
-# Get Repos Lambda
 
 locals {
   get_repos_name = "get_repos"
@@ -40,7 +37,7 @@ resource "aws_lambda_function" "get_repos" {
   filename      = "${local.get_repos_name}.zip"
   function_name = local.get_repos_name
   handler       = "${local.get_repos_name}.lambda_handler"
-  role          = aws_iam_role.assume_role_lambda.arn
+  role          = aws_iam_role.get_repos_role.arn
 
   environment {
     variables = {
@@ -56,6 +53,29 @@ resource "aws_cloudwatch_log_group" "get_repos_log_group" {
   name = "/aws/lambda/${aws_lambda_function.get_repos.function_name}"
 
   retention_in_days = 30
+}
+
+data "aws_iam_policy_document" "get_repos_policy_document" {
+  statement {
+    sid = "GetReposPolicy"
+
+    effect = "Allow"
+
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+
+    resources = [
+      aws_cloudwatch_log_group.get_repos_log_group.arn
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "get_repos_role_policy" {
+  policy = data.aws_iam_policy_document.get_repos_policy_document.json
+  role   = aws_iam_role.get_repos_role.id
 }
 
 resource "aws_lambda_permission" "apigw_get_repos" {
