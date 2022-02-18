@@ -41,7 +41,7 @@ resource "aws_lambda_function" "get_repos" {
 
   environment {
     variables = {
-      USER = var.git_user
+      GIT_TOKEN = var.git_token
     }
   }
 

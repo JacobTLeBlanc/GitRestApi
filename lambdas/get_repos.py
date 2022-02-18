@@ -1,9 +1,12 @@
 import json
 import logging
 import urllib.request as request
+import os
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+TOKEN = os.getenv('GIT_TOKEN')
 
 def get_repos(user):
     """
@@ -25,7 +28,10 @@ def get_repos(user):
     response = request.urlopen(
             request.Request(
                 url='https://api.github.com/users/' + user + '/repos',
-                headers={'Accept': 'application/json'},
+                headers={
+                    'Accept': 'application/json',
+                    'Authorization': TOKEN
+                },
                 method='GET'
             ),
             timeout=5
