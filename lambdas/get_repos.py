@@ -27,7 +27,7 @@ def get_repos(user):
 
     response = request.urlopen(
             request.Request(
-                url='https://api.github.com/users/' + user + '/repos',
+                url='https://api.github.com/users/' + user + '/repos?per_page=50',
                 headers={
                     'Accept': 'application/json',
                     'Authorization': TOKEN

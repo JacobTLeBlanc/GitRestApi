@@ -9,12 +9,6 @@ variable "account_id" {
   description = "AWS Account ID"
 }
 
-variable "git_user" {
-  type        = string
-  default     = "jacobtleblanc"
-  description = "GitHub User to use in API"
-}
-
 variable "log_retention_in_days" {
   type        = number
   default     = 3
